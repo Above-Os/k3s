@@ -114,7 +114,7 @@ download_and_package_traefik () {
 
 TRAEFIK_FILE=traefik-${TRAEFIK_VERSION}.tgz
 TRAEFIK_CRD_FILE=traefik-crd-${TRAEFIK_VERSION}.tgz
-TRAEFIK_URL=https://helm.traefik.io/traefik/${TRAEFIK_FILE}
+TRAEFIK_URL=https://traefik.github.io/charts/traefik/${TRAEFIK_FILE}
 
 setup_tmp
 download_and_package_traefik

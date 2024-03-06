@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e -x
+
+cd $(dirname $0)/..
+
+. ./scripts/version.sh
+
+GO=${GO-go}
+
+mkdir -p dist/artifacts
+
+
+CMD_NAME=dist/artifacts/k3s
+
+"${GO}" generate
+LDFLAGS="
+    -X github.com/rancher/k3s/pkg/version.Version=$VERSION
+    -X github.com/rancher/k3s/pkg/version.GitCommit=${COMMIT:0:8}
+    -w -s
+"
+STATIC="-extldflags '-static'"
+CGO_ENABLED=0 "${GO}" build -ldflags "$LDFLAGS $STATIC" -o ${CMD_NAME} ./cmd/k3s/main.go
+
+stat ${CMD_NAME}
