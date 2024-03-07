@@ -27,7 +27,7 @@ git checkout ${RUNC_VERSION} -b k3s
 popd
 
 setup_tmp() {
-    TMP_DIR=$(mktemp -d --tmpdir=${CHARTS_DIR})
+    TMP_DIR=$(TMPDIR=${CHARTS_DIR} mktemp -d )
     cleanup() {
         code=$?
         set +e
